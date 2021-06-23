@@ -6,7 +6,6 @@ import lombok.Setter;
 import pl.marcinkowski.schoolmgmt.entities.user.User;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -14,12 +13,11 @@ import java.util.List;
 @Setter
 public class ClassTeacher {
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id
-    private Long id;
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Id
+  private Long id;
 
-    @OneToOne()
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private User user;
-
+  @OneToOne()
+  @JoinColumn(name = "user_id", referencedColumnName = "id")
+  private User user;
 }

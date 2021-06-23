@@ -7,8 +7,10 @@ import org.springframework.stereotype.Component;
 import pl.marcinkowski.schoolmgmt.entities.user.Role;
 import pl.marcinkowski.schoolmgmt.entities.user.User;
 import pl.marcinkowski.schoolmgmt.entities.user.UserRole;
-import pl.marcinkowski.schoolmgmt.repositories.UserRepository;
-import pl.marcinkowski.schoolmgmt.repositories.UserRoleRepository;
+import pl.marcinkowski.schoolmgmt.repositories.classgroup.ClassTeacherRepository;
+import pl.marcinkowski.schoolmgmt.repositories.classgroup.SchoolClassRepository;
+import pl.marcinkowski.schoolmgmt.repositories.user.UserRepository;
+import pl.marcinkowski.schoolmgmt.repositories.user.UserRoleRepository;
 
 import java.util.Arrays;
 import java.util.List;
@@ -20,25 +22,31 @@ public class Bootstrap {
 
   private final UserRepository userRepository;
   private final UserRoleRepository userRoleRepository;
+  private final ClassTeacherRepository classTeacherRepository;
+  private final SchoolClassRepository schoolClassRepository;
   private final PasswordEncoder passwordEncoder;
 
   public Bootstrap(
       UserRepository userRepository,
       UserRoleRepository userRoleRepository,
+      ClassTeacherRepository classTeacherRepository,
+      SchoolClassRepository schoolClassRepository,
       PasswordEncoder passwordEncoder) {
     this.userRepository = userRepository;
     this.userRoleRepository = userRoleRepository;
+    this.classTeacherRepository = classTeacherRepository;
+    this.schoolClassRepository = schoolClassRepository;
     this.passwordEncoder = passwordEncoder;
   }
 
   @EventListener(ApplicationReadyEvent.class)
   public void bootstrapData() {
+
     createRolePermissionsEntities();
     createAdmins();
-
     createTeachers();
-
     createStudents();
+
 
     System.out.println(" --- Bootstrapped API with Dummy Data ---");
     System.out.println("Loaded Users - " + userRepository.count());
@@ -115,4 +123,6 @@ public class Bootstrap {
 
     userRepository.saveAll(teachers);
   }
+
+  private void createSchoolClasses() {}
 }

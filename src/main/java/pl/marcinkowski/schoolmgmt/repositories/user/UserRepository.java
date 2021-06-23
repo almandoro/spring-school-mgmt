@@ -1,4 +1,4 @@
-package pl.marcinkowski.schoolmgmt.repositories;
+package pl.marcinkowski.schoolmgmt.repositories.user;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
