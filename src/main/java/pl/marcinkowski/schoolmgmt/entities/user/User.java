@@ -1,7 +1,8 @@
 package pl.marcinkowski.schoolmgmt.entities.user;
 
 import lombok.*;
-import pl.marcinkowski.schoolmgmt.entities.classgroup.ClassTeacher;
+import pl.marcinkowski.schoolmgmt.entities.lesson.Teacher;
+import pl.marcinkowski.schoolmgmt.entities.schoolclass.Student;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -42,5 +43,9 @@ public class User {
   private Collection<UserRole> roles;
 
   @OneToOne(mappedBy = "user")
-  private ClassTeacher classTeacher;
+  private Teacher teacher;
+
+  @OneToOne(mappedBy = "user")
+  private Student student;
+
 }
