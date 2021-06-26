@@ -3,7 +3,6 @@ package pl.marcinkowski.schoolmgmt.security;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
-import org.springframework.security.access.expression.SecurityExpressionHandler;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -12,10 +11,9 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.FilterInvocation;
-import org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler;
-import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
@@ -50,8 +48,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .and()
              .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
             .and()
-              .formLogin()
+              .httpBasic().realmName("SCHL_MGM")
+            .and()
+              .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     ;
+
+    http.addFilterAfter(new CustomFilter(),
+            BasicAuthenticationFilter.class);
   }
 
   @Bean

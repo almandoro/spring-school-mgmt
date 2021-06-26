@@ -3,7 +3,7 @@ package pl.marcinkowski.schoolmgmt.security;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import pl.marcinkowski.schoolmgmt.entities.user.User;
+import pl.marcinkowski.schoolmgmt.api.user.entity.User;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -19,12 +19,8 @@ public class UserDetailsImpl implements UserDetails {
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
     List<GrantedAuthority> authorities = new ArrayList<>();
-    this.user
-        .getRoles()
-        .forEach(
-            role -> {
-              authorities.add(new SimpleGrantedAuthority(role.getRole().name()));
-            });
+    SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(this.user.getRole().name());
+    authorities.add(simpleGrantedAuthority);
 
     return authorities;
   }
