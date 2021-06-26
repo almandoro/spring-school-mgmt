@@ -64,9 +64,4 @@ public class LessonController {
     return allLessons;
   }
 
-  @PutMapping
-  public ResponseEntity createLesson(@RequestBody Lesson lesson) {
-      return lessonService.updateLesson(lesson);
-  }
-
 }

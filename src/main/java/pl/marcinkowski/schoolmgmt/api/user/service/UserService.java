@@ -1,13 +1,9 @@
 package pl.marcinkowski.schoolmgmt.api.user.service;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 import pl.marcinkowski.schoolmgmt.api.user.entity.User;
 import pl.marcinkowski.schoolmgmt.api.user.repository.UserRepository;
-import pl.marcinkowski.schoolmgmt.utils.ErrorResponse;
 
 import javax.persistence.EntityExistsException;
 
