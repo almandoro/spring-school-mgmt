@@ -16,7 +16,6 @@ public class Lesson {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  // TODO:
   @Enumerated(EnumType.STRING)
   private LessonSubject subject;
 
@@ -24,4 +23,8 @@ public class Lesson {
   @JoinColumn(name = "teacher_id", referencedColumnName = "id")
   private Teacher teacher;
 
+  public Lesson(LessonSubject subject, Teacher teacher) {
+    this.subject = subject;
+    this.teacher = teacher;
+  }
 }

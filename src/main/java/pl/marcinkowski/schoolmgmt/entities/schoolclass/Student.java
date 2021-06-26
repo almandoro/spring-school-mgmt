@@ -21,7 +21,25 @@ public class Student {
   @ManyToMany(mappedBy = "students")
   private Collection<SchoolClass> schoolClasses;
 
-  @OneToOne()
+  @OneToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "user_id", referencedColumnName = "id")
   private User user;
+
+  public Student(User user) {
+    this.user = user;
+  }
+
+  public Student(Collection<SchoolClass> schoolClasses, User user) {
+    this.schoolClasses = schoolClasses;
+    this.user = user;
+  }
+
+  @Override
+  public String toString() {
+    return "Student{" +
+            "id=" + id +
+            ", schoolClasses=" + schoolClasses +
+            ", user=" + user.getFirstName() + user.getLastName() +
+            '}';
+  }
 }

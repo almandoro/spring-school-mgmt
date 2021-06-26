@@ -32,8 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Override
   public void configure(WebSecurity web) throws Exception {
-    web.ignoring().antMatchers("/console/**")
-                  .antMatchers("/lessons/**");
+    web.ignoring().antMatchers("/console/**");
   }
 
   @Override
@@ -44,7 +43,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   @Override
   protected void configure(HttpSecurity http) throws Exception {
     http.authorizeRequests()
-              .antMatchers("/").permitAll()
               .antMatchers(HttpMethod.GET,"/lessons/**","/group/**").hasRole("STUDENT")
               .antMatchers(HttpMethod.POST,"/lessons/**","/group/**").hasRole("TEACHER")
               .antMatchers(HttpMethod.PUT,"/lessons/**","/group/**").hasRole("ADMIN")

@@ -21,17 +21,23 @@ public class SchoolClass {
   private Integer grade;
   private String className;
 
-  public SchoolClass(Integer grade, String className, Teacher teacher) {
-    this.grade = grade;
-    this.className = className;
-  }
-
   @ManyToMany
   @JoinTable(
       name = "class_attendance",
       joinColumns = @JoinColumn(name = "student_id", referencedColumnName = "id"),
       inverseJoinColumns = @JoinColumn(name = "schoolclass_id", referencedColumnName = "id"))
   private Collection<Student> students;
+
+  public SchoolClass(Integer grade, String className, Collection<Student> students) {
+    this.grade = grade;
+    this.className = className;
+    this.students = students;
+  }
+
+  public SchoolClass(Integer grade, String className) {
+    this.grade = grade;
+    this.className = className;
+  }
 
   @Override
   public String toString() {
